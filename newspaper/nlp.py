@@ -153,11 +153,16 @@ def keywords(text):
 def split_sentences(text):
     """Split a large string into sentences
     """
-    import nltk.data
-    tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
+    # import nltk.data
+    # tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
-    sentences = tokenizer.tokenize(text)
+    # sentences = tokenizer.tokenize(text)
+
+    import re 
+    sentences = text.split('।')
+    # sentences = filter(None, re.split("[, \-!?।]+", text))
     sentences = [x.replace('\n', '') for x in sentences if len(x) > 10]
+    # print('sentences are : {}'.format(sentences))
     return sentences
 
 
