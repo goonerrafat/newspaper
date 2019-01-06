@@ -227,6 +227,7 @@ Features
       ja              Japanese
       be              Belarusian
       lt              Lithuanian
+      bn              Bengali
 
 
 Get it now

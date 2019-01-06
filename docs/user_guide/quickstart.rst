@@ -272,3 +272,4 @@ of popular news source urls.. In case you need help choosing a news source!
       ja              Japanese
       be              Belarusian
       lt              Lithuanian
+      bn              Bengali
