@@ -190,6 +190,7 @@ class ContentExtractor(object):
 
         date_match = re.search(urls.STRICT_DATE_REGEX, url)
         if date_match:
+            print('found in url regex')
             date_str = date_match.group(0)
             datetime_obj = parse_date_str(date_str)
             if datetime_obj:
@@ -204,6 +205,8 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'itemprop', 'value': 'datePublished',
              'content': 'datetime'},
+            {'attribute': 'itemprop', 'value': 'datePublished',
+             'content': 'content'},
             {'attribute': 'property', 'value': 'og:published_time',
              'content': 'content'},
             {'attribute': 'name', 'value': 'article_date_original',
@@ -216,6 +219,8 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'pubdate', 'value': 'pubdate',
              'content': 'datetime'},
+            {'attribute': 'label', 'value': 'label',
+             'content': 'content'},
         ]
         for known_meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(
@@ -227,6 +232,7 @@ class ContentExtractor(object):
                     meta_tags[0],
                     known_meta_tag['content'])
                 datetime_obj = parse_date_str(date_str)
+                print('datetime_obj {}'.format(datetime_obj))
                 if datetime_obj:
                     return datetime_obj
 
