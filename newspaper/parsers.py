@@ -123,7 +123,9 @@ class Parser(object):
         elems = node.xpath(selector, namespaces=NS)
         # remove the root node
         # if we have a selection tag
+        # print(elems)
         if node in elems and (tag or childs):
+            # print('********************Node   '.format(node))
             elems.remove(node)
         return elems
 

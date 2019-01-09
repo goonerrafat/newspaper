@@ -179,6 +179,8 @@ class ContentExtractor(object):
         3. Raw regex searches in the HTML + added heuristics
         """
 
+        # print(doc.text)
+
         def parse_date_str(date_str):
             if date_str:
                 try:
@@ -190,7 +192,7 @@ class ContentExtractor(object):
 
         date_match = re.search(urls.STRICT_DATE_REGEX, url)
         if date_match:
-            print('found in url regex')
+            # print('found in url regex')
             date_str = date_match.group(0)
             datetime_obj = parse_date_str(date_str)
             if datetime_obj:
@@ -205,7 +207,7 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'itemprop', 'value': 'datePublished',
              'content': 'datetime'},
-            {'attribute': 'itemprop', 'value': 'datePublished',
+            {'attribute': 'itemprop', 'value': 'datePublished', #prothomalo
              'content': 'content'},
             {'attribute': 'property', 'value': 'og:published_time',
              'content': 'content'},
@@ -221,18 +223,30 @@ class ContentExtractor(object):
              'content': 'datetime'},
             {'attribute': 'label', 'value': 'label',
              'content': 'content'},
+            {'attribute': 'class', 'value': 'entry-date published updated', #http://www.dailyandolonerbazar.com/%E0%A6%B6%E0%A7%87%E0%A6%96-%E0%A6%B0%E0%A6%BE%E0%A6%B8%E0%A7%87%E0%A6%B2-%E0%A6%97%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A7%8B%E0%A6%B2%E0%A6%BF%E0%A6%AD%E0%A6%BE/
+             'content': 'datetime'},
+            {'attribute': 'class', 'value': 'label',
+             'content': 'content'}, 
+            {'attribute': 'class', 'value': 'time',
+             'content': 'data-published'},  
         ]
         for known_meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(
                 doc,
                 attr=known_meta_tag['attribute'],
                 value=known_meta_tag['value'])
+            # print(meta_tags)
             if meta_tags:
-                date_str = self.parser.getAttribute(
-                    meta_tags[0],
+                for i in range(len(meta_tags)):
+                    date_str = self.parser.getAttribute(
+                    meta_tags[i],
                     known_meta_tag['content'])
+                    # if date_str is not None:
+                    #     print(meta_tags[i])
+                    #     print(date_str)
+
                 datetime_obj = parse_date_str(date_str)
-                print('datetime_obj {}'.format(datetime_obj))
+                # print('datestring found {} and parsed_date {}'.format(date_str, datetime_obj))
                 if datetime_obj:
                     return datetime_obj
 

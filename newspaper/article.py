@@ -213,6 +213,7 @@ class Article(object):
         self.throw_if_not_downloaded_verbose()
 
         self.doc = self.config.get_parser().fromstring(self.html)
+        # print(self.doc)
         self.clean_doc = copy.deepcopy(self.doc)
 
         if self.doc is None:
