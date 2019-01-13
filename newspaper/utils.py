@@ -34,7 +34,7 @@ class FileHelper(object):
     @staticmethod
     def loadResourceFile(filename):
         if not os.path.isabs(filename):
-            dirpath = /newspaper/
+            dirpath = "/newspaper/"
             path = os.path.join(dirpath, 'resources', filename)
         else:
             path = filename
